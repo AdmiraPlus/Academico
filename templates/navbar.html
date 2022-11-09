@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<nav class="py-2 bg-light border-bottom">
+	<div class="container d-flex flex-wrap">
+		<ul class="nav me-auto">
+			
+			<li class="nav-item">
+				<a href="{% url 'inicio' %}" class="nav-link link-dark px-2 active">Inicio</a>
+			</li>
+			
+			<li class="nav-item dropdown">
+				<a href="#" class="nav-link dropdown-toggle px-2 link-dark" data-bs-toggle="dropdown">Archivos</a>
+				<ul class="dropdown-menu">
+					<li><a class="dropdown-item" href="{% url 'alumnos_listar' %}">Alumnos</a></li>
+					<li><a class="dropdown-item" href="{% url 'docentes_listar' %}">Docentes</a></li>
+					<li><a class="dropdown-item" href="{% url 'sis_evaluacion_listar' %}">Sistemas de Evaluacion</a></li>
+					<li><a class="dropdown-item" href="{% url 'cursos_listar' %}">Cursos</a></li>
+					<li><a class="dropdown-item" href="{% url 'ciclos_listar' %}">Ciclos Academicos</a></li>
+				</ul>
+			</li>
+			
+			<li class="nav-item">
+				<a href="#" class="nav-link link-dark px-2">Prematrícula</a>
+			</li>
+			<li class="nav-item">
+				<a href="#" class="nav-link link-dark px-2">Opción</a>
+			</li>
+		</ul>
+		
+		<ul class="nav">
+			{% if user.is_authenticated %}
+			<li class="nav-item">
+				<a class="nav-link link-dark px-2 disabled text-primary" href="#">[ {{ user }} ]</a>
+			</li>
+			<li class="nav-item"><a href="{% url 'cerrar_sesion' %}" class="nav-link link-dark px-2">Cerrar sesión</a></li>
+			{% else %}
+			<li class="nav-item"><a href="{% url 'iniciar_sesion' %}" class="nav-link link-dark px-2">Iniciar sesión</a></li>
+			{% endif %}
+			<li class="nav-item"><a href="{% url 'registrar_usuario' %}" class="nav-link link-dark px-2">Registrarse</a></li>
+		</ul>
+		
+	</div>
+</nav>		

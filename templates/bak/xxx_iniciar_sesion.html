@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+{% extends 'base.html' %}
+
+<!-- Block Title -->
+{% block title %}
+Iniciar Sessión
+{% endblock %}
+
+<!-- Block Herader -->
+{% block header %}
+{% endblock %}
+
+<!-- Block Content -->
+{% block content %}
+
+<div class="container">
+	<form method="post" class="mt-5">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<button>
+			Iniciar Sessión
+		</button>
+	</form>
+</div>
+
+<!-- Block Footer -->
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

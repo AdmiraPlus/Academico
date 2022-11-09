@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+{% extends 'base.html' %}
+
+<!-- Block Title -->
+{% block title %}
+Alumnos
+{% endblock %}
+
+<!-- Block Herader -->
+{% block header %}
+{% include 'navbar.html' %}
+{% endblock %}
+
+<!-- Block Content -->
+{% block content %}
+
+<form method="post" class="mt-5">
+	{% csrf_token %}
+	<div class="card text-center">
+		<div class="card-header">
+		  Eliminar Alumnos
+		</div>
+		<div class="card-body">
+		  <h5 class="card-title">Atención!</h5>
+		  <p class="card-text">¿Está seguro de eliminar el alumno: <strong>{{ alumno }}</strong>?</p>
+		  
+		  <button class="btn btn-danger" type="submit">Eliminar</button>
+		  <a class="btn btn-outline-secondary" href="{% url 'alumnos_listar' %}" role="button">Cancelar</a>
+				
+		</div>
+	  </div>
+		
+</form>
+
+<!-- Block Footer -->
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

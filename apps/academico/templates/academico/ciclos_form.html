@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+{% extends 'base.html' %}
+
+<!-- Block Title -->
+{% block title %}
+Ciclos Académicos
+{% endblock %}
+
+<!-- Block Herader -->
+{% block header %}
+{% include 'navbar.html' %}
+{% endblock %}
+
+<!-- Block Content -->
+{% block content %}
+
+<form method="post" class="mt-5">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<button class="btn btn-primary" type="submit">Guardar</button>
+	<a class="btn btn-danger" href="{% url 'ciclos_listar' %}" role="button">Cancelar</a>
+</form>
+
+<!-- Block Footer -->
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

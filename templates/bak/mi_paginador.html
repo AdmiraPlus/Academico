@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<!-- Se reciben:
+paginator = el objeto paginado
+page_obj  = el objeto Page del objeto paginado
+ -->
+
+
+{% if paginator.num_pages > 1 %}
+	<div class="d-flex justify-content-center">
+		<ul class="pagination justify-content-center">
+			
+			<!-- Botón Anterior -->
+			{% if page_obj.has_previous %}
+			<li class="page-item d-none d-sm-block">
+				<a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+			</li>
+			{% else %}
+			<li class="page-item d-none d-sm-block disabled">
+				<a class="page-link" href="#">Anterior</a>
+			</li>
+			{% endif %}
+			
+			
+			{% for p in elided %}
+				{% if page_obj.number == p %}
+					<li class="page-item d-none d-sm-block">
+						<a class="page-link" href="#">{{ p }}</a>
+					</li>
+				{% else %}
+					<li class="page-item d-none d-sm-block">
+						<a class="page-link" href="?page={{ p }}">{{ p }}</a>
+					</li>
+				{% endif %}
+			{% endfor %}
+			
+			
+			<!-- Botón Siguiente -->
+			{% if entity.has_next %}
+			<li class="page-item d-none d-sm-block">
+				<a class="page-link" href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+			</li>
+			{% else %}
+			<li class="page-item d-none d-sm-block disabled">
+				<a class="page-link" href="#">Siguiente</a>
+			</li>
+			{% endif %}
+		</ul>
+	</div>
+{% endif %}

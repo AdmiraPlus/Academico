@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+{% extends "base.html" %}
+
+{% block title %} Inicio {% endblock %}
+
+{% block header %} {% include 'navbar.html' %} {% endblock %}
+
+{% block content %}
+<div class="card text-center mt-5">
+	<div class="card-header bg-primary text-white">
+		Inicio
+	</div>
+	<div class="card-body">
+		<h5 class="card-title">Aplicación ACADÉMICO</h5>
+		<p class="card-text">Esta es la página de incio de la aplicación.</p>
+		<a href="#" class="btn btn-primary">Inicio</a>
+	</div>
+	<div class="card-footer text-muted">
+		{{ fecha }}
+	</div>
+</div>
+{% endblock %}
+
+{% block footer %} {% endblock %}
