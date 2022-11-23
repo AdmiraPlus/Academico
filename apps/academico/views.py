@@ -15,9 +15,8 @@ from . import forms
 
 @login_required
 def alumnos_listar(request):
+	# Filtrado de los datos -------------
 	text = request.GET.get('buscar', '')
-	print(f'El texto del filtro es = {text}')
-	print(f'En el request.GET.get("buscar") hay esto = {request.GET.get("buscar")}')
 	alumnos_filtrados = models.Alumnos.objects.filter(
 		Q(codigo_uni__icontains=text) |
 		Q(numero_dni__icontains=text) |
@@ -25,9 +24,13 @@ def alumnos_listar(request):
 		Q(apellido_m__icontains=text) |
 		Q(nombres__icontains=text)
 	)
+	
+	# Paginado de los datos -------------
 	alumnos_paginados = Paginator(alumnos_filtrados, 7)
 	page = request.GET.get('page', 1)
 	alumnos = alumnos_paginados.get_page(page)  # El objeto "page_obj"
+	
+	# Renderizado de los datos ----------
 	return render(request, 'academico/alumnos_listar.html', {'data': alumnos, 'paginator': alumnos_paginados, 'buscar': text})
 
 @login_required
