@@ -9,3 +9,10 @@ admin.site.register(SistemaEvaluacion)
 admin.site.register(Cursos)
 admin.site.register(CiclosAcademicos)
 
+admin.site.register(Aulas)
+admin.site.register(Secciones)
+admin.site.register(ClasificacionPrediccion)
+admin.site.register(Matricula)
+admin.site.register(DetalleMatricula)
+admin.site.register(CursoSeccion)
+

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+{% extends 'base.html' %}
+
+<!-- Block Title -->
+{% block title %}
+	Pre-Matrícula
+{% endblock %}
+
+<!-- Block Herader -->
+{% block header %}
+	{% include 'navbar.html' %}
+{% endblock %}
+
+<!-- Block Content -->
+{% block content %}
+	
+	<h1>Página de recomandación y selección de sección</h1>
+	<p>Código: {{ codigo }}</p>
+	<p>Alumno: {{ alumno }}</p>
+	<p>Matricula: {{ matricula }}</p>
+	<p>Cursos Seleccionados: {{ CursosSeleccionados }}</p>
+	<p>Créditos Seleccionados: {{ CreditosSeleccionados }}</p>
+	
+	
+	
+	{# <a href="{% url 'pre_matricula' %}" class="btn btn-secondary">Regresar</a> #}
+	
+{% endblock %}
+
+<!-- Block Footer -->
+{% block footer %}
+{% endblock %}

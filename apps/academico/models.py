@@ -253,6 +253,12 @@ class Matricula(models.Model):
 	
 # -- Tabla DetalleMatricula --------------------------------------------------------------------------------
 class DetalleMatricula(models.Model):
+	id_matricula = models.ForeignKey(
+		Matricula, 
+		on_delete=models.CASCADE, 
+		verbose_name="Detalle de Matrícula", 
+		db_column="id_matricula"
+	)
 	id_curso = models.ForeignKey(
 		Cursos, 
 		on_delete=models.DO_NOTHING, 
@@ -261,12 +267,16 @@ class DetalleMatricula(models.Model):
 		db_column="id_curso"
 	)
 	repetido = models.PositiveSmallIntegerField(
-		verbose_name="Repetido"
+		verbose_name="Repetido",
+		default=0
 	)
 	id_seccion = models.ForeignKey(
 		Secciones, 
 		on_delete=models.DO_NOTHING, 
 		verbose_name="Sección", 
+		null=True,
+		default=None,
+		blank=True,
 		db_column="id_seccion"
 	)
 	id_codigo_prediccion = models.ForeignKey(
@@ -278,7 +288,7 @@ class DetalleMatricula(models.Model):
 	)
 	
 	def __str__(self):
-		return f"{self.id_curso__codigo}-{self.id_curso__curso}"
+		return f"{self.id_curso.codigo}-{self.id_curso.curso}"
 	
 	class Meta:
 		db_table = "DetalleMatricula"
@@ -353,7 +363,7 @@ class CursoSeccion(models.Model):
 	)
 	
 	def __str__(self):
-		return f"{self.id_curso__codigo}-{self.id_curso__curso} {self.id_seccion__seccion}"
+		return f"{self.id_curso.codigo}-{self.id_curso.curso} {self.id_seccion.seccion}"
 	
 	class Meta:
 		db_table = "CursoSeccion"

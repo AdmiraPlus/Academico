@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+
+{% extends 'base.html' %}
+
+<!-- Block Title -->
+{% block title %}
+Pre-Matrícula
+{% endblock %}
+
+<!-- Block Herader -->
+{% block header %}
+{% include 'navbar.html' %}
+{% endblock %}
+
+<!-- Block Content -->
+{% block content %}
+<div class="card border-primary mt-3">
+	<div class="card-header text-center text-white fw-bolder bg-primary">
+		{% if request.method == 'GET' %}
+		P R E M A T R I C U L A
+		{% else %}
+		PRE-MATRICULA SELECCIÓN DE VURSO Y SECCIÓN
+		{% endif %}
+	</div>
+
+	<div class="card-body">
+		<!-- Datos del Alumno -->
+		<div class="card-group text-center">
+			<div class="card border-primary">
+				<div class="card-header bg-primary bg-opacity-25 fw-bold py-0">
+					Alumno
+				</div>
+				<div class="card-group text-center">
+					<div class="card-body py-0">
+						<h5 class="card-title pt-1">{{ alumno.codigo_uni }}</h5>
+					</div>
+					<div class="card-body py-0">
+						<h5 class="card-title pt-1">{{ alumno }}</h5>
+					</div>
+					<div class="card-body py-0">
+						<h5 class="card-title pt-1">{{ matricula.get_facultad_display }}</h5>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Cursos y Créditos Seleccionados -->
+		<div class="card-group text-center mt-3">
+			<div class="card border-primary">
+				<div class="card-header bg-primary bg-opacity-25 fw-bold py-0">
+					Cursos Seleccionados
+				</div>
+				<div class="card-body py-0">
+					<h5 class="card-title pt-1">{{ CursosSeleccionados }}</h5>
+				</div>
+			</div>
+			<div class="card border-primary">
+				<div class="card-header bg-primary bg-opacity-25 fw-bold py-0">
+					Créditos Seleccionados
+				</div>
+				<div class="card-body py-0">
+					<h5 class="card-title pt-1">{{ CreditosSeleccionados }}</h5>
+				</div>
+			</div>
+			<div class="card border-primary">
+				<div class="card-header bg-primary bg-opacity-25 fw-bold py-0">
+					Créditos Permitidos
+				</div>
+				<div class="card-body py-0">
+					<h5 class="card-title pt-1">{{ matricula.max_cred }}</h5>
+				</div>
+			</div>
+		</div>
+
+		<!-- Detalle de la matrícula -->
+		<div class="card bord border-primary table-responsive mt-3">
+			<div class="card-header text-center fw-bolder bg-primary bg-opacity-25 fw-bold">
+				{% if request.method == 'GET' %}
+					Cursos Permitidos
+				{% else %}
+					Cursos Recomendados/Seleccionados
+				{% endif %}
+			</div>
+			{% if request.method == 'GET' %}
+				<div class="card-body">
+					<table class="table table-bordered">
+						<thead class="table-secondary">
+							<tr class="text-center">
+								<th colspan="2">Curso</th>
+								<th>Ciclo</th>
+								<th>Créditos</th>
+								<th>Repetido</th>
+								<th>Pre-requisitos</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for d in detalle %}
+								<tr>
+									<td>{{ d.id_curso.codigo }}</td>
+									<td>{{ d.id_curso.curso }}</td>
+									<td class="text-end">{{ d.id_curso.creditos }}</td>
+									<td class="text-end">{{ d.id_curso.ciclo }}</td>
+									<td class="text-end">{{ d.repetido }}</td>
+									<td>{{ d.id_curso.pre_requisitos }}</td>
+								</tr>
+							{% empty %}
+								<p>El Alumno no tiene detalle que mostrar</p>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			{% else %}
+				<div class="card-body">
+					<table class="table table-bordered">
+						<thead class="table-secondary">
+							<tr class="text-center">
+								<th colspan="2">Curso</th>
+								<th>Ciclo</th>
+								<th>Créditos</th>
+								
+								<th>Predicción</th>
+								<th>Selección</th>
+								<th>Sección</th>
+							</tr>
+						</thead>
+						<tbody>
+						{% for d in detalle %}
+							<tr>
+								<!-- Datos del Curso -->
+								<td>{{ d.id_curso.codigo }}</td>
+								<td>{{ d.id_curso.curso }}</td>
+								<td class="text-center">{{ d.id_curso.ciclo }}</td>
+								<td class="text-center">{{ d.id_curso.creditos }}</td>
+								
+								<!-- Predicción -->
+								<td>
+									{% if d.id_codigo_prediccion.codigo_prediccion == '0' or d.id_codigo_prediccion.codigo_prediccion == '1' %}
+										<span class="badge text-bg-danger text-wrap p-2">
+											<strong>{{ d.id_codigo_prediccion.codigo_prediccion }}</strong>
+										</span>
+										<span class="text-danger">
+											<strong>{{ d.id_codigo_prediccion.descripcion_prediccion }}</strong>
+										</span>	
+									{% elif d.id_codigo_prediccion.codigo_prediccion == '3' or d.id_codigo_prediccion.codigo_prediccion == '4' %}
+										<span class="badge text-bg-success text-wrap p-2">
+											<strong>{{ d.id_codigo_prediccion.codigo_prediccion }}</strong>
+										</span>
+										<span class="text-success">
+											<strong>{{ d.id_codigo_prediccion.descripcion_prediccion }}</strong>
+										</span>
+									{% else %}
+										<span class="badge text-bg-primary text-wrap p-2">
+											<strong>{{ d.id_codigo_prediccion.codigo_prediccion }}</strong>
+										</span>
+										<span class="text-primary">
+											<strong>{{ d.id_codigo_prediccion.descripcion_prediccion }}</strong>
+										</span>
+									{% endif %}
+								</td>
+								
+								<!-- Seleccionar curso -->
+								<td class="text-center">
+									{% if d.id_codigo_prediccion.codigo_prediccion != '0' and d.id_codigo_prediccion.codigo_prediccion != '1' %}
+										<input type="checkbox"class="form-check-input" style="height: 1.5rem; width: 1.5rem;" checked onclick="">
+									{% else %}
+										<input type="checkbox"class="form-check-input" style="height: 1.5rem; width: 1.5rem;">
+									{% endif %}
+									
+								</td>
+								
+								<!-- Sección -->
+								<td class="text-end">
+									<span class="mx-3">
+										<strong>{{ d.id_seccion|default:"" }}</strong>
+									</span>
+									
+									{% if d.id_seccion is None %}
+										<button class="btn btn-primary p-0" style="height: 1.8rem; width: 1.8rem;">
+											<strong>+</strong>
+										</button>
+									{% else %}
+										<button class="btn btn-danger p-0" style="height: 1.8rem; width: 1.8rem;">
+											<strong>X</strong>
+										</button>
+									{% endif %}
+								</td>
+							</tr>
+						{% empty %}
+							<p>El Alumno no tiene detalle que mostrar</p>
+						{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+
+	<!-- Botones -->
+	<div class="card-footer text-muted text-end">
+		<form method="post">
+			{% csrf_token %}
+			<button type="submit" class="btn btn-primary">Recomendación</button>
+			<button class="btn btn-secondary">Volver</button>
+
+		</form>
+	</div>
+</div>
+{% endblock %}
+
+<!-- Block Footer -->
+{% block footer %}
+{% endblock %}
+
+
+<!-- <a href="{% url 'seleccionar_seccion' alumno matricula %}" class="btn btn-primary">Recomendación</a> -->

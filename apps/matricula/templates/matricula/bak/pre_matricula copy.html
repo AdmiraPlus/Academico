@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+{% extends 'base.html' %}
+
+<!-- Block Title -->
+{% block title %}
+Pre-Matrícula
+{% endblock %}
+
+<!-- Block Herader -->
+{% block header %}
+	{% include 'navbar.html' %}
+{% endblock %}
+
+<!-- Block Content -->
+{% block content %}
+	
+	<h1>Plantilla Pre-Matrícula</h1>
+	
+	<h3>Alumno</h3>
+	<p>Alumno: {{ alumno }}</p>
+	<p>Código UNI: {{ alumno.codigo_uni }}</p>
+	<p>Apellido P.: {{ alumno.apellido_p }}</p>
+	<p>Apellido M.: {{ alumno.apellido_m }}</p>
+	<p>Nombres: {{ alumno.nombres }}</p>
+	<p>Número DNI: {{ alumno.numero_dni }}</p>
+	
+	<h3>Matricula</h3>
+	<!-- <p>Facultad: {{ matricula.facultad }}</p>   get_FOO_display() -->
+	<p>Facultad: {{ matricula.get_facultad_display }}</p>
+	<p>Créditos Máximo: {{ matricula.max_cred }}</p>
+	
+	<h3>Detalle Matricula</h3>
+	
+	{% for d in detalle %}
+		<!-- <p>Código Curso: {{ d.id_curso.id }} - {{ d.id_curso.codigo }}-{{ d.id_curso }}</p> -->
+		<p><strong>Curso:</strong> {{ d.id_curso.codigo }}-{{ d.id_curso }}</p>
+		<p><strong>Repetido:</strong> {{ d.repetido }}</p>
+		<p><strong>Sección:</strong> {{ d.seccion }}</p>
+		<p><strong>Predicción:</strong> {{ d.id_codigo_prediccion }}</p>
+		<hr>
+	{% empty %}
+		<p>El Alumno no tiene detalle que mostrar</p>
+	{% endfor %}
+	
+<!-- Block Footer -->
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+{% extends 'base.html' %}
+
+<!-- Block Title -->
+{% block title %}
+	Buscar Alumno
+{% endblock %}
+
+<!-- Block Herader -->
+{% block header %}
+	{% include 'navbar.html' %}
+{% endblock %}
+
+<!-- Block Content -->
+{% block content %}
+
+<form method="post" class="mt-5">
+	{% csrf_token %}
+	<div class="col-md-6 col-lg-4 offset-md-3 offset-lg-4">
+		
+		<div class="card">
+			<div class="card-header">
+				Buscar Alumno
+			</div>
+			<div class="card-body">
+				
+				<!-- {{ form.as_p }} -->
+				
+				{% if mensaje %}
+					<div class="alert alert-danger alert-dismissible fade show">{{ mensaje }}</div>
+				{% endif %}
+				<div class="form-group mb-3">
+					<label for="codigo_alumno">Código</label>
+					<input type="text" class="form-control form-control-sm" id="codigo_alumno" name="codigo_alumno" value="{{ form.codigo_alumno.value | default:'' }}">
+				</div>
+				
+				<div class="justify-content-evenly mt-3">
+					<button class="btn btn-primary" type="submit">Buscar</button>
+					<a class="btn btn-danger" href="{% url 'inicio' %}" role="button">Cancelar</a>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</form>
+
+<!-- Block Footer -->
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

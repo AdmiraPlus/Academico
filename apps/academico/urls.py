@@ -2,12 +2,15 @@
 
 from django.urls import path
 
+from .views import *
+
+""" 
 from .views import alumnos_listar, alumnos_agregar, alumnos_editar, alumnos_eliminar
 from .views import docentes_listar, docentes_agregar, docentes_editar, docentes_eliminar
 from .views import sis_evaluacion_listar, sis_evaluacion_agregar, sis_evaluacion_editar, sis_evaluacion_eliminar
 from .views import cursos_listar, cursos_agregar, cursos_editar, cursos_eliminar
 from .views import ciclos_listar, ciclos_agregar, ciclos_editar, ciclos_eliminar
-
+"""
 
 urlpatterns = [
 	path('alumnos/listar/', alumnos_listar, name='alumnos_listar'),
