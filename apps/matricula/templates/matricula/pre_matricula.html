@@ -4,12 +4,12 @@
 
 <!-- Block Title -->
 {% block title %}
-Pre-Matrícula
+	Pre-Matrícula
 {% endblock %}
 
 <!-- Block Herader -->
 {% block header %}
-{% include 'navbar.html' %}
+	{% include 'navbar.html' %}
 {% endblock %}
 
 <!-- Block Content -->
@@ -22,7 +22,7 @@ Pre-Matrícula
 		PRE-MATRICULA SELECCIÓN DE VURSO Y SECCIÓN
 		{% endif %}
 	</div>
-
+	
 	<div class="card-body">
 		<!-- Datos del Alumno -->
 		<div class="card-group text-center">
@@ -43,7 +43,7 @@ Pre-Matrícula
 				</div>
 			</div>
 		</div>
-
+		
 		<!-- Cursos y Créditos Seleccionados -->
 		<div class="card-group text-center mt-3">
 			<div class="card border-primary">
@@ -71,7 +71,7 @@ Pre-Matrícula
 				</div>
 			</div>
 		</div>
-
+		
 		<!-- Detalle de la matrícula -->
 		<div class="card bord border-primary table-responsive mt-3">
 			<div class="card-header text-center fw-bolder bg-primary bg-opacity-25 fw-bold">
@@ -194,14 +194,14 @@ Pre-Matrícula
 			{% endif %}
 		</div>
 	</div>
-
+	
 	<!-- Botones -->
 	<div class="card-footer text-muted text-end">
 		<form method="post">
 			{% csrf_token %}
 			<button type="submit" class="btn btn-primary">Recomendación</button>
 			<button class="btn btn-secondary">Volver</button>
-
+			
 		</form>
 	</div>
 </div>
