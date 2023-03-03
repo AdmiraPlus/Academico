@@ -56,9 +56,6 @@ class Docentes(models.Model):
 		verbose_name="Nombres"
 	)
 	
-	def __str__(self):
-		return f"{self.apellido_p} {self.apellido_m}, {self.nombres}"
-	
 	class Meta:
 		db_table = "Docentes"
 		verbose_name = "Docente"
@@ -67,6 +64,9 @@ class Docentes(models.Model):
 			"apellido_m", 
 			"nombres"
 		]
+	
+	def __str__(self):
+		return f"{self.apellido_p} {self.apellido_m}, {self.nombres}"
 
 # -- Tabla SistemaEvaluacion -------------------------------------------------------------------------------
 class SistemaEvaluacion(models.Model):
@@ -76,13 +76,13 @@ class SistemaEvaluacion(models.Model):
 		null=True
 	)
 	
-	def __str__(self):
-		return self.sistema_evaluacion
-	
 	class Meta:
 		db_table = "SistemasEvaluacion"
 		verbose_name = "SistemaEvaluacion"
 		ordering = ["sistema_evaluacion"]
+	
+	def __str__(self):
+		return self.sistema_evaluacion
 
 # -- Tabla Cursos ------------------------------------------------------------------------------------------
 class Cursos(models.Model):
@@ -114,9 +114,6 @@ class Cursos(models.Model):
 		verbose_name="Pre-requisitos"
 	)
 	
-	def __str__(self):
-		return self.curso
-	
 	class Meta:
 		db_table = "Cursos"
 		verbose_name = "Curso"
@@ -125,6 +122,9 @@ class Cursos(models.Model):
 			"codigo"
 		]
 
+	def __str__(self):
+		return self.curso
+	
 # -- Tabla CiclosAcademicos --------------------------------------------------------------------------------
 class CiclosAcademicos(models.Model):
 	CICLOS = ( 
@@ -153,14 +153,14 @@ class CiclosAcademicos(models.Model):
 		verbose_name="Tipo"
 	)
 	
-	def __str__(self):
-		return f"{self.anno}{self.ciclo}"
-	
 	class Meta:
 		db_table = "CiclosAcademicos"
 		verbose_name = "CiclosAcademico"
 		ordering = ["anno", "ciclo"]
 
+	def __str__(self):
+		return f"{self.anno}{self.ciclo}"
+	
 # -- Tabla ClasificacionPrediccion -------------------------------------------------------------------------
 class ClasificacionPrediccion(models.Model):
 	codigo_prediccion = models.CharField(
@@ -172,14 +172,14 @@ class ClasificacionPrediccion(models.Model):
 		verbose_name="Descripción de Predicción"
 	)
 	
-	def __str__(self):
-		return f"{self.codigo_prediccion} - {self.descripcion_prediccion}"
-	
 	class Meta:
 		db_table = "ClasificacionPrediccion"
 		verbose_name = "ClasificacionPrediccion"
 		ordering = ["codigo_prediccion"]
 
+	def __str__(self):
+		return f"{self.codigo_prediccion} - {self.descripcion_prediccion}"
+	
 # -- Tabla Secciones ---------------------------------------------------------------------------------------
 class Secciones(models.Model):
 	seccion = models.CharField(
@@ -187,14 +187,14 @@ class Secciones(models.Model):
 		verbose_name="Sección"
 	)
 	
-	def __str__(self):
-		return self.seccion
-	
 	class Meta:
 		db_table = "Secciones"
 		verbose_name = "Sección"
 		ordering = ["seccion"]
 
+	def __str__(self):
+		return self.seccion
+	
 # -- Tabla Aulas -------------------------------------------------------------------------------------------
 class Aulas(models.Model):
 	aula = models.CharField(
@@ -202,13 +202,13 @@ class Aulas(models.Model):
 		verbose_name="Aula"
 	)
 	
-	def __str__(self):
-		return self.aula
-	
 	class Meta:
 		db_table = "Aulas"
 		verbose_name = "Aula"
 		ordering = ["aula"]
+	
+	def __str__(self):
+		return self.aula
 	
 # -- Tabla Matricula ---------------------------------------------------------------------------------------
 class Matricula(models.Model):
@@ -239,10 +239,6 @@ class Matricula(models.Model):
 		verbose_name="Cantidad de Créditos máx. a inscribir"
 	)
 	
-	
-	def __str__(self):
-		return f"{self.id_alumno.codigo_uni}-{self.id_alumno.apellido_p} {self.id_alumno.apellido_m}, {self.id_alumno.nombres}"
-	
 	class Meta:
 		db_table = "Matriculas"
 		verbose_name = "Matricula"
@@ -250,6 +246,9 @@ class Matricula(models.Model):
 			"id_alumno__apellido_p",
 			"id_alumno__apellido_m"
 		]
+	
+	def __str__(self):
+		return f"{self.id_alumno.codigo_uni}-{self.id_alumno.apellido_p} {self.id_alumno.apellido_m}, {self.id_alumno.nombres}"
 	
 # -- Tabla DetalleMatricula --------------------------------------------------------------------------------
 class DetalleMatricula(models.Model):
@@ -287,14 +286,14 @@ class DetalleMatricula(models.Model):
 		db_column="id_codigo_prediccion"
 	)
 	
-	def __str__(self):
-		return f"{self.id_curso.codigo}-{self.id_curso.curso}"
-	
 	class Meta:
 		db_table = "DetalleMatricula"
 		verbose_name = "DetalleMatricula"
 		ordering = ["id_curso__curso"]
 		
+	def __str__(self):
+		return f"{self.id_curso.codigo}-{self.id_curso.curso}"
+	
 # -- Tabla CursoSeccion ------------------------------------------------------------------------------------
 class CursoSeccion(models.Model):
 	TIPO_CLASE = (
@@ -362,12 +361,12 @@ class CursoSeccion(models.Model):
 		verbose_name="Inscritos"
 	)
 	
-	def __str__(self):
-		return f"{self.id_curso.codigo}-{self.id_curso.curso} {self.id_seccion.seccion}"
-	
 	class Meta:
 		db_table = "CursoSeccion"
 		verbose_name = "CursosSeccion"
 		ordering = ["id_curso__curso"]
 
+	def __str__(self):
+		return f"{self.id_curso.codigo}-{self.id_curso.curso} {self.id_seccion.seccion}"
+	
 # ----------------------------------------------------------------------------------------------------------
