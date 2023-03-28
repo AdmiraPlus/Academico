@@ -1,3 +1,5 @@
+# Este es una prueba para el despliegue en PythonAnyWhere
+
 """
 Django settings for academico (cnf) project.
 
